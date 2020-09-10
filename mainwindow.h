@@ -15,9 +15,15 @@ class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
+	/*!
+	 * \brief mScene сцена для отображения точек
+	 */
 	QGraphicsScene *mScene = nullptr;
 	QFileDialog *mFileDialog = nullptr;
 
+	/*!
+	 * \brief mPrintPoints список полученных из файлов точек
+	 */
 	QList<QSharedPointer<QGraphicsEllipseItem>> mPrintPoints;
 
 public:
@@ -25,10 +31,12 @@ public:
 	~MainWindow();
 
 private slots:
+	/*!
+	 * \brief on_pushButton_clicked выбор и обработка файла при нажатие на кнопку "Открыть XML"
+	 */
 	void on_pushButton_clicked();
 
 private:
 	Ui::MainWindow *ui;
-	bool event(QEvent *event) override;
 };
 #endif // MAINWINDOW_H

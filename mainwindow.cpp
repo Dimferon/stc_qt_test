@@ -11,9 +11,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	ui->graphicsView->setScene(mScene);
 	mFileDialog = new QFileDialog(this);
 
-	ui->graphicsView->resize(600, 600); // Устанавливаем размер graphicsView
-	ui->graphicsView->setRenderHint(QPainter::Antialiasing); // Настраиваем рендер
-	ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground); // Кэш фона
+	ui->graphicsView->resize(600, 600);
+	ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+	ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
 	ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 }
 
@@ -36,6 +36,7 @@ void MainWindow::on_pushButton_clicked()
 												"XML файл (*.xml)");
 	ui->lineEdit_fileName->setText(filePath.toString().remove("file:///"));
 	QFile file(filePath.toString().remove("file:///"));
+
 	file.open(QFile::OpenModeFlag::ReadOnly);
 	auto xmlData = file.readAll();
 	file.close();
@@ -68,11 +69,4 @@ void MainWindow::on_pushButton_clicked()
 		mScene->addItem(p.get());
 	}
 	this->repaint();
-}
-
-bool MainWindow::event(QEvent *event)
-{
-	QMainWindow::event(event);
-	if (event->type() == QEvent::Scroll) {
-	}
 }
